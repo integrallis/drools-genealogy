@@ -1,0 +1,95 @@
+package org.integrallis.drools.genealogy;
+ 
+import org.integrallis.drools.genealogy.SiblingRelationship.SiblingType;
+import java.util.List;
+
+rule "HalfSiblings"
+	when
+		person1: Person(
+		    p1mother: mother != null, 
+		    p1father: father != null
+		)
+		person2: Person(
+		    mother != null, 
+		    father != null, 
+		    (
+		     ((parents contains p1mother) && (parents not contains p1father)) || 
+		     ((parents not contains p1mother) && (parents contains p1father))
+		    ),
+		    this != person1
+		) 
+		not SiblingRelationship(members contains person1, members contains person2)
+	then 	
+		insert(new SiblingRelationship(person1, person2, SiblingType.HALF_SIBLING));
+end
+
+rule "Siblings"
+	when
+		person1: Person(
+		    p1mother: mother != null, 
+		    p1father: father != null
+		)
+		person2: Person(
+		    mother != null, 
+		    father != null, 
+		    mother == p1mother, 
+		    father == p1father, 
+		    this != person1
+		) 
+		not SiblingRelationship(members contains person1, members contains person2)
+	then 	
+		insert(new SiblingRelationship(person1, person2, SiblingType.SIBLING));
+end
+
+/**
+Ancestry Rules
+**/
+
+rule "ParentsAreAncestors"
+	when
+	    descendant: Person(
+		    descendantMother: mother != null, 
+		    descendantFather: father != null
+	    )
+	    ancestor: Person(
+	        this == descendantMother || this == descendantFather
+	    )
+	then
+	    insert(new AncestorRelationship(descendant, ancestor));
+end
+
+rule "AncestorsOfAncestorsAreAncestors"
+	when
+	    AncestorRelationship(
+	        ancestor : ancestor, descendant1 : descendant
+	    )
+	    AncestorRelationship(
+	        ancestor == descendant1, descendant : descendant
+	    )
+	    not AncestorRelationship(descendant == descendant, ancestor == ancestor)
+	then
+	    insert(new AncestorRelationship(descendant, ancestor));
+end
+
+rule "PrintRelationships"
+    when
+        relationship: SiblingRelationship()
+    then
+        relationship.printIt();
+end
+
+query "getAllRelationships"
+    relationship: SiblingRelationship()
+end
+
+query "getAllAncestorRelationship"
+    relationship: AncestorRelationship()
+end
+
+query "getAllAncestorsFor" (Person person)
+    relationship: AncestorRelationship(descendant == person)
+end
+
+query "getAllDescendantsFor" (Person person)
+    relationship: AncestorRelationship(ancestor == person)
+end
