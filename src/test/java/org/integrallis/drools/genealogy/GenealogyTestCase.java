@@ -85,7 +85,7 @@ public class GenealogyTestCase extends BaseDroolsTestCase {
         };
 	    
 	    for (Person person : everybody) {
-	    	knowledgeSession.insert(person);
+	      	knowledgeSession.insert(person);
 		}
 	    
         knowledgeSession.fireAllRules();

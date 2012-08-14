@@ -10,7 +10,7 @@ public class Person {
     private List<Person> parents = new ArrayList<Person>();
     
     public Person(String name) {
-    	this.name = name;
+    	    this.name = name;
     }
     
 	public Person(String name, Person mother, Person father) {

@@ -5,10 +5,10 @@ import java.util.List;
 
 public class SiblingRelationship {
     public static enum SiblingType { 
-    	SIBLING("Siblings"), HALF_SIBLING("Half Siblings"); 
-    	private SiblingType(String label) { this.label = label; }
-    	private String label;
-    	public String toString() { return label; }
+    	    SIBLING("Siblings"), HALF_SIBLING("Half Siblings"); 
+    	    private SiblingType(String label) { this.label = label; }
+    	    private String label;
+    	    public String toString() { return label; }
     };
     
     private List<Person> members = new ArrayList<Person>();
@@ -17,15 +17,15 @@ public class SiblingRelationship {
     private Person person2;
     
     public SiblingRelationship(Person sibling1, Person sibling2, SiblingType type) {
-    	members.add(sibling1);
-    	members.add(sibling2);
-    	person1 = sibling1;
-    	person2 = sibling2;
-    	this.type = type;
+	    	members.add(sibling1);
+	    	members.add(sibling2);
+	    	person1 = sibling1;
+	    	person2 = sibling2;
+	    	this.type = type;
     }
     
     public List<Person> getMembers() {
-    	return members;
+    		return members;
     }
 
 	public SiblingType getType() {
