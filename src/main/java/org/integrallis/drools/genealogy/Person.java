@@ -5,8 +5,11 @@ import java.util.List;
 
 public class Person {
     private String name;
+    
+    // you could do this...
     private Person mother;
     private Person father;
+    // or you could do this...
     private List<Person> parents = new ArrayList<Person>();
     
     public Person(String name) {
@@ -24,9 +27,11 @@ public class Person {
 	public String getName() {
 		return name;
 	}
+	
 	public Person getMother() {
 		return mother;
 	}
+	
 	public Person getFather() {
 		return father;
 	}
