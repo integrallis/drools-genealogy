@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.drools.runtime.rule.QueryResults;
-import org.drools.runtime.rule.QueryResultsRow;
+import org.kie.api.runtime.rule.QueryResults;
+import org.kie.api.runtime.rule.QueryResultsRow;
 import org.integrallis.drools.genealogy.SiblingRelationship.SiblingType;
 import org.integrallis.drools.junit.BaseDroolsTestCase;
 import org.junit.Test;
@@ -17,7 +17,7 @@ import org.junit.Test;
 public class GenealogyTestCase extends BaseDroolsTestCase {
 	
 	public GenealogyTestCase() {
-		super("genealogy.drl");
+		super("ksession-rules");
 	}
 	
 	@Test
