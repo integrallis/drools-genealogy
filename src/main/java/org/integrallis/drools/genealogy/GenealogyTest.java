@@ -16,15 +16,15 @@ public class GenealogyTest {
 		    knowledgeSession = kContainer.newKieSession("ksession-rules");
 
 			// 4 - create and assert some facts
-            Person brian = new Person("Brian");
-            Person anne = new Person("Anne");
+            Person phil = new Person("Phil");
+            Person claire = new Person("Anne");
             Person jessica = new Person("Jessica");
-            Person michael = new Person("Michael", anne, brian);
-            Person steve = new Person("Steve", jessica, brian);
-            Person chuck = new Person("Chuck", anne, brian);
+            Person michael = new Person("Michael", claire, phil);
+            Person steve = new Person("Steve", jessica, phil);
+            Person chuck = new Person("Chuck", claire, phil);
             
-            knowledgeSession.insert(brian);
-            knowledgeSession.insert(anne);
+            knowledgeSession.insert(phil);
+            knowledgeSession.insert(claire);
             knowledgeSession.insert(jessica);
             knowledgeSession.insert(michael);
             knowledgeSession.insert(steve);
