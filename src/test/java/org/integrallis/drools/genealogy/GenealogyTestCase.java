@@ -40,6 +40,8 @@ public class GenealogyTestCase extends BaseDroolsTestCase {
         
 		QueryResults results = knowledgeSession.getQueryResults( "getAllRelationships" );
 		
+		assertEquals(3, results.size());
+		
 		for ( QueryResultsRow row : results ) {
 			SiblingRelationship relationship = (SiblingRelationship) row.get( "relationship" );
         	List<Person> members = relationship.getMembers();
